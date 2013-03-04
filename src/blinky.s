@@ -29,9 +29,20 @@
 # THE SOFTWARE.
 #
         .file       "blinky.s"
+        .include    "inc\siu.i"
+        .include    "inc\swt.i"
+
+LED_OFF             .equ    PDO_VOH
+LED_ON              .equ    PDO_VOL
+LED0_GPDO           .equ    SIU_GPDO188_OFFSET
+
+LED0_PCR            .equ    SIU_PCR188_OFFSET
+LED0_PCR_VALUE      .equ    ( PA_GPIO | OBE_ENAB | DSC_50PF | ODE_ENAB | \
+                              SRC_MAX | WPE_DIS )
+
 # -----------------------------------------------------------------------------
 #   @public
-#   cycle led 0 continuously and keep the wd at bay
+#   cycle led 0 continuously and kill swt
 # -----------------------------------------------------------------------------
         .section    .init, text
         .global     blinky
