@@ -3,11 +3,11 @@ ENTRY(blinky)
 
 SECTIONS
 {
-	GROUP : 
-	{
-		.init  : {}
-		.text (TEXT) : {}
-		.ctors : {}		  /**< automagically gen'd */
-		.dtors : {}       /*   by linker           */
-	} > ram	
+    GROUP : 
+    {
+        .init  : {}
+        .text (TEXT) : {}
+        .ctors : {}       /**< automagically gen'd */
+        .dtors : {}       /*   by linker           */
+    } > ram 
 }
