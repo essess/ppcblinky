@@ -1,0 +1,13 @@
+MEMORY { ram: org = 0x40000000, len = 0x17800 }
+ENTRY(blinky)
+
+SECTIONS
+{
+	GROUP : 
+	{
+		.init  : {}
+		.text (TEXT) : {}
+		.ctors : {}		  /**< automagically gen'd */
+		.dtors : {}       /*   by linker           */
+	} > ram	
+}
