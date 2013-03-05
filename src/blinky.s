@@ -42,12 +42,28 @@ LED0_PCR_VALUE      .equ    ( PA_GPIO | OBE_ENAB | DSC_50PF | ODE_ENAB | \
 
 # -----------------------------------------------------------------------------
 #   @public
-#   cycle led 0 continuously and kill swt
+#   kill swt, kill booke wdt, and cycle led 0 continuously
 # -----------------------------------------------------------------------------
         .section    .init, text
         .global     blinky
-        .function   "blinky", blinky, blinky_end-blinky
-blinky: b           blinky                  ;< comment
-blinky_end:
+        .type       blinky, @function
+blinky:
+        lis         r1, (MAP0_ENAB|MAP1_ENAB|MAP2_ENAB)@h   ;< disable swt, but
+        lis         r2, SWT_BASE@ha                         ;  still allow later
+        stw         r1, SWT_CR@l(r2)                        ;  modification
+
+        ; TODO ;< kill booke wdt
+
+        li          r3, LED_ON                              ;< on first to avoid
+        lis         r4, SIU_BASE@ha                         ;  glitch
+        stb         r3, LED0_GPDO@l(r4)                     ;
+
+        lis         r5, LED0_PCR_VALUE@h                    ;< set as output
+        ori         r5, r5, LED0_PCR_VALUE@l                ;
+        sth         r5, LED0_PCR@l(r4)                      ;
+
+        ; TODO ;< invert, wait, loop
+
+        b           .
 # -----------------------------------------------------------------------------
 
