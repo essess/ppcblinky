@@ -51,19 +51,24 @@ blinky:
         lis         r1, (MAP0_ENAB|MAP1_ENAB|MAP2_ENAB)@h   ;< disable swt, but
         lis         r2, SWT_BASE@ha                         ;  still allow later
         stw         r1, SWT_CR@l(r2)                        ;  modification
-
-        ; TODO ;< kill booke wdt
+    
+        xor         r1, r1, r1                              ;< kill booke wdt as
+        mttcr       r1                                      ;  best we can, see
+                                                            ;  note 0
 
         li          r3, LED_ON                              ;< on first to avoid
-        lis         r4, SIU_BASE@ha                         ;  glitch
-        stb         r3, LED0_GPDO@l(r4)                     ;
+        lis         r2, SIU_BASE@ha                         ;  glitch
+        stb         r3, LED0_GPDO@l(r2)                     ;
 
-        lis         r5, LED0_PCR_VALUE@h                    ;< set as output
-        ori         r5, r5, LED0_PCR_VALUE@l                ;
-        sth         r5, LED0_PCR@l(r4)                      ;
+        lis         r1, LED0_PCR_VALUE@h                    ;< set as output
+        ori         r1, r1, LED0_PCR_VALUE@l                ;
+        sth         r1, LED0_PCR@l(r2)                      ;
 
         ; TODO ;< invert, wait, loop
 
         b           .
 # -----------------------------------------------------------------------------
+# note 0: TCR[WRC] can only be cleared by a reset. The BAM has turned it on for
+#         us, so the best we can do at this point is to simply put the trip
+#         point so far out in time that it won't trigger itself.
 
