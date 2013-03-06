@@ -92,6 +92,7 @@ SIU_PCR191          .equ    SIU_BASE+SIU_PCR191_OFFSET
                                             ;  pin data out
 PDO_VOH             .equ    %1 << 0         ;< voh is driven onto external pin
 PDO_VOL             .equ    %0 << 0         ;< vol is driven onto external pin
+PDO_MASK            .equ    %1 << 0
 
 SIU_GPDO188_OFFSET  .equ    $06bc
 SIU_GPDO188         .equ    SIU_BASE+SIU_GPDO188_OFFSET
