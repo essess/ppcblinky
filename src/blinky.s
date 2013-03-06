@@ -65,11 +65,11 @@ blinky:
         sth         r1, LED0_PCR@l(r2)                      ;
 
         lis         r1, $0008                               ;< $00080000 ~6hz
-loop:   mtctr       r1                                      ;< reload cached cnt
-wait:   bdnz        wait                                    ;
+@loop:  mtctr       r1                                      ;< reload cached cnt
+@wait:  bdnz        @wait                                   ;
         xori        r3, r3, PDO_MASK                        ;< invert state
         stb         r3, LED0_GPDO@l(r2)                     ;< drive
-        b           loop
+        b           @loop
 # -----------------------------------------------------------------------------
 # note 0: TCR[WRC] can only be cleared by a reset. The BAM has turned it on for
 #         us, so the best we can do at this point is to simply put the trip
