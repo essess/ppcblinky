@@ -28,9 +28,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH
 # THE SOFTWARE.
 #
+        .include    "siu.i"
+        .include    "swt.i"
         .file       "blinky.s"
-        .include    "inc\siu.i"
-        .include    "inc\swt.i"
 
 LED_OFF             .equ    PDO_VOH
 LED_ON              .equ    PDO_VOL
@@ -45,9 +45,9 @@ LED0_PCR_VALUE      .equ    ( PA_GPIO | OBE_ENAB | DSC_50PF | ODE_ENAB | \
 #   kill swt, kill booke wdt, and cycle led 0 continuously
 # -----------------------------------------------------------------------------
         .section    .init, text
-        .global     blinky
+        .public     blinky
         .type       blinky, @function
-blinky:
+blinky: 
         lis         r1, (MAP0_ENAB|MAP1_ENAB|MAP2_ENAB)@h   ;< disable swt, but
         lis         r2, SWT_BASE@ha                         ;  still allow later
         stw         r1, SWT_CR@l(r2)                        ;  modification
@@ -74,4 +74,3 @@ blinky:
 # note 0: TCR[WRC] can only be cleared by a reset. The BAM has turned it on for
 #         us, so the best we can do at this point is to simply put the trip
 #         point so far out in time that it won't trigger itself.
-
