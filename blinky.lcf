@@ -4,8 +4,7 @@ SECTIONS
 {
     GROUP : 
     {
-        .init  : {}
-        .text (TEXT) : {}
+        .init (TEXT) : {}
         .ctors : {}       /**< automagically gen'd */
         .dtors : {}       /*   by linker           */
     } > ram 

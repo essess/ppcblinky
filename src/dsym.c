@@ -1,19 +1,6 @@
 /**
  * Copyright (c) 2013, Sean Stasiak. All rights reserved.
  * Developed by: Sean Stasiak <sstasiak@gmail.com>
- * Refer to license terms at the bottom of this file
- */
-
-/**
- * @public
- * @brief kill swt, kill booke wdt, and cycle led 0 continuously
- */
-void
-  blinky( void );
-
-/**
- * Copyright (c) 2013, Sean Stasiak. All rights reserved.
- * Developed by: Sean Stasiak <sstasiak@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -41,3 +28,11 @@ void
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH
  * THE SOFTWARE.
  */
+ 
+ /**
+  * You may be wondering why this empty file is here. I do this as a 'trick'
+  * to Metrowerks to get it to generate debug directives for the assembly code
+  * automagically. Otherwise, I'd have to do a lot of manual .line directives
+  * to generate the needed dwarf sections for the debugger to use. This way is
+  * easiest and brain dead simple.
+  */
